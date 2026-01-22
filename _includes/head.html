@@ -11,9 +11,22 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 <meta http-equiv="cleartype" content="on">
-<head>
+<!-- <head>
   <base target="_blank">
-</head>
+</head> -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="http"]').forEach(a => {
+      try {
+        const u = new URL(a.href);
+        if (u.host !== location.host) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+      } catch {}
+    });
+  });
+</script>
